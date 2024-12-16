@@ -18,7 +18,7 @@ vec nextCombination(vec v) {
     vec t = v | (v - 1); // t gets v's least significant 0 bits set to 1
     // Next set to 1 the most significant bit to change, 
     // set to 0 the least significant ones, and add the necessary 1 bits.
-    vec w = (t + 1) | (((~t & -~t) - 1) >> ((v == 0 ? 0 : std::countr_zero(v)) + 1));
+    vec w = (t + 1) | (((~t & -~t) - 1) >> (std::countr_zero(v) + 1));
     return w;
 }
 
@@ -28,6 +28,11 @@ Syndromes calculateSyndromes(const matrix& h) {
     Syndromes syndromes;
     syndromes.reserve(syndromeCount);
     syndromes[0] = 100; // 0 always exists. For now set it to something so its not default value
+
+    if (syndromeCount == 1) { // only 1 syndrome exists, so stop now because loop will not exit early
+        syndromes[0] = 0;
+        return syndromes;
+    }
 
     // iterate bit count from 1 to n
     size_t permutations = n;
@@ -75,7 +80,9 @@ vec decode(vec input, const Syndromes& syndromes, const matrix& h) {
     size_t n = h.cols();
     size_t k = n - h.rows();
     vec r = input;
-    for (size_t i = 0; i < n; i++) {
+    // algorithm in the paper loops over N bits, but because we throw out last n-k bits, we can just not proccess them,
+    // because they don't affect previous bits, so we loop over K bits
+    for (size_t i = 0; i < k; i++) {
         // compute H * r (syndrome)
         vec rSyndrome = h.multVectorOnRight(r);
         uint8_t rWeight = getSyndromeWeight(syndromes, rSyndrome);

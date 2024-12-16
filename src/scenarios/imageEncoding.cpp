@@ -3,13 +3,13 @@
 #include <filesystem>
 
 #define STB_IMAGE_IMPLEMENTATION
-#include "stb_image.h"
+#include "../vendor/stb_image.h"
 #define STB_IMAGE_WRITE_IMPLEMENTATION
-#include "stb_image_write.h"
+#include "../vendor/stb_image_write.h"
 
-#include "channel.h"
-#include "math.h"
-#include "encoder.h"
+#include "../channel.h"
+#include "../math.h"
+#include "../encoder.h"
 
 void imageEncodingStart(const CommonParams& params) {
     double p = userInputNumber<double>("Iveskite klaidos tikimybe p: ", 0.0, 1.0);

@@ -1,8 +1,8 @@
 #include "textEncoding.h"
 
-#include "channel.h"
-#include "math.h"
-#include "encoder.h"
+#include "../channel.h"
+#include "../math.h"
+#include "../encoder.h"
 
 void textEncodingStart(const CommonParams& params) {
     double p = userInputNumber<double>("Iveskite klaidos tikimybe p: ", 0.0, 1.0);

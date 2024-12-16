@@ -33,6 +33,24 @@ T userInputNumber(std::string_view prompt, T min, T max) {
         std::string input;
         std::getline(std::cin, input);
 
+        // replace ',' with '.'
+        auto it = input.find(',');
+        if (it != std::string::npos) input.replace(input.find(','), 1, ".");
+
+        // check if there are more than 1 '.'
+        if (std::count(input.begin(), input.end(), '.') > 1) {
+            std::print("Klaida! Ivestas ne skaicius.\n");
+            continue;
+        }
+        // check if there are non-digit characters
+        if (std::find_if(input.begin(), input.end(), [](char c) {
+            return !std::isdigit(c) && c != '.';
+        }) != input.end()) {
+            std::print("Klaida! Ivestas ne skaicius.\n");
+            continue;
+        }
+        
+        // convert to number
         try {
             T num;
             if constexpr (std::is_floating_point_v<T>) num = std::stold(input);

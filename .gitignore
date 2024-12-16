@@ -1,4 +1,6 @@
 .vscode/
 build/
 images/
+*.pdf
+result*
 program.exe

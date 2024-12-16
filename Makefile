@@ -2,14 +2,14 @@
 # you should 'make clean' after modifying headers
 
 CC = g++
-CFLAGS = -std=c++23 -Wall -Wextra -Wpedantic
-LFLAGS = -lstdc++exp
+CFLAGS = -std=c++23 -Wall -Wextra -Wpedantic -flto
+LFLAGS = -static -lstdc++exp
 OUT = program
-SRC = $(wildcard src/*.cpp)
+SRC = $(wildcard src/*.cpp) $(wildcard src/scenarios/*.cpp) $(wildcard src/vendor/*.cpp)
 OBJ = $(SRC:src/%.cpp=build/%.o)
 
 build:
-	mkdir build
+	mkdir build build\scenarios build\vendor
 
 release: CFLAGS += -O3 -DNDEBUG
 release: $(OUT)

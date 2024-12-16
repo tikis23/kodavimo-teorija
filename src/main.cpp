@@ -1,7 +1,7 @@
 #include "io.h"
-#include "vectorEncoding.h"
-#include "textEncoding.h"
-#include "imageEncoding.h"
+#include "scenarios/vectorEncoding.h"
+#include "scenarios/textEncoding.h"
+#include "scenarios/imageEncoding.h"
 
 bool chooseMode(CommonParams& p) {
     int32_t selection = userInputChoiceArray("Pasirinkite veiksma", {
@@ -36,10 +36,3 @@ int main() {
     while (chooseMode(p)) {}
     return 0;
 }
-
-// #include "benchmark.h"
-
-// int main() {
-//     benchmark(31, 16);
-//     return 0;
-// }
