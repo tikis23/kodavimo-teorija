@@ -3,6 +3,11 @@
 #include "scenarios/textEncoding.h"
 #include "scenarios/imageEncoding.h"
 
+// Allows user to select a scenario.
+// args:
+//   p - ref to program parameters used in scenarios. Can be modified if user chooses to.
+// returns:
+//   false if user chose to exit, true otherwise.
 bool chooseMode(CommonParams& p) {
     int32_t selection = userInputChoiceArray("Pasirinkite veiksma", {
         "vektoriaus kodavimas",

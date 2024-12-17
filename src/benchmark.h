@@ -20,6 +20,9 @@ struct batch {
     int64_t totalVecCount = -1;
 };
 
+// Runs a single test for given N and K values.
+// Only used manually for benchmarking.
+// Left here for reference.
 batch runSingleNK(const std::vector<double>& errorRates, size_t n, size_t k, Channel c) {
     batch result{};
     size_t inputMatRows = k;
@@ -59,6 +62,9 @@ batch runSingleNK(const std::vector<double>& errorRates, size_t n, size_t k, Cha
     return result;
 }
 
+// Runs benchmarks and writes results to a file.
+// Only used manually for benchmarking.
+// Left here for reference.
 void benchmark(const std::vector<double>& errorRates, size_t maxN, size_t maxK) {
     std::chrono::steady_clock::time_point begin = std::chrono::steady_clock::now();
     std::vector<std::unordered_map<vec, std::unordered_map<vec, batch>>> results;
